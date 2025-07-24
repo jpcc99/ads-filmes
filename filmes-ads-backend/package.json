@@ -1,0 +1,25 @@
+{
+  "name": "filmes-ads-backend",
+  "version": "1.0.0",
+  "description": "Backend do filmes-ads. Uma API apra CRUD de filmes",
+  "keywords": [
+    "filmes",
+    "ads",
+    "web",
+    "mock"
+  ],
+  "license": "MIT",
+  "author": "João Pedro da Costa Carvalho",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
