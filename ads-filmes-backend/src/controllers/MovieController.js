@@ -49,10 +49,6 @@ class MovieController {
    * @param {import ("express").Response} res
   */
   static async create(req, res) {
-    const missingFields = await getMissingFields([`titulo`, `descricao`, `ano_lancamento`, `poster_url`, `genero`], req.body);
-    if (missingFields.length > 0) {
-      return res.status(400).json({ message: `Não é possível criar o filme sem ${missingFields}` });
-    }
     const { titulo, descricao, ano_lancamento, poster_url, genero } = req.body;
     try {
       let movie = await Movie.findAll({
