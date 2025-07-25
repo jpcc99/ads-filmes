@@ -21,7 +21,8 @@ export default function PaginaEditarFilme({ params }) {
     const urlApi = "http://localhost:3001";
     const { id } = React.use(params);
 
-    const generos = ['Ação', 'Comédia', 'Drama', 'Terror', 'Romance'];
+    const generos = ['Ação', 'Aventura', 'Comédia', 'Drama', 'Ficção Científica', 'Terror', 'Romance',
+        'Animação', 'Documentário', 'Fantasia', 'Suspense', 'Crime', 'Mistério'];
 
     useEffect(() => {
         buscarFilme();

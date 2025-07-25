@@ -12,12 +12,13 @@ export default function PaginaCadastro() {
         poster_url: '',
         genero: ''
     });
-    
+
     const [carregando, setCarregando] = useState(false);
     const router = useRouter();
     const urlApi = "http://localhost:3001";
 
-    const generos = ['Ação', 'Comédia', 'Drama', 'Terror', 'Romance'];
+    const generos = ['Ação', 'Aventura', 'Comédia', 'Drama', 'Ficção Científica', 'Terror', 'Romance',
+        'Animação', 'Documentário', 'Fantasia', 'Suspense', 'Crime', 'Mistério'];
 
     const manipularMudancaCampo = (evento) => {
         const { name, value } = evento.target;
