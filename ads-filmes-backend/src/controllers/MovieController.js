@@ -78,9 +78,31 @@ class MovieController {
     }
   }
 
+  /**
+   * @param {import ("express").Request} req
+   * @param {import ("express").Response} res
+  */
+  static async update(req, res) {
+    const { id } = req.params;
+    const dataToUpdate = req.body;
+    if (!dataToUpdate || Object.keys(dataToUpdate).length === 0) {
+      return res.status(400).send("Nada para atualizar");
+    }
+    console.log("dataToUpdate: ", dataToUpdate);
+    try {
+      const [affectedRows, updatedMovie] = await Movie.update(dataToUpdate, {
+        returning: true,
+        where: {
+          movie_id: id,
+        },
+      });
+      if (affectedRows === 0) {
+        return res.status(404).send("Filme não encontrado");
+      }
+      return res.status(200).json({ message: "Filme atualizado com sucesso", data: updatedMovie[0] })
     } catch (err) {
       console.error(err);
-      return res.status(500).send("Não foi possível buscar o filme");
+      return res.status(500).send("Não foi possível atualizar o filme");
     }
   }
 }
