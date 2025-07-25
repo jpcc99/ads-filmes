@@ -9,6 +9,7 @@ class MovieController {
   static async list(_req, res) {
     try {
       const movies = await Movie.findAll({
+        attributes: [`titulo`, `descricao`, `ano_lancamento`, `poster_url`, `genero`],
         order: ["titulo"],
       });
       if (movies.length === 0) {
