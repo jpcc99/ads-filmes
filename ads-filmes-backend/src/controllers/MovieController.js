@@ -60,7 +60,7 @@ class MovieController {
           titulo: titulo,
         },
       });
-      if (titulo.toLowerCase() === movie[0].titulo) {
+      if (movie.length !== 0) {
         return res.status(400).send("Filme já cadastrado com esse título");
       }
       movie = await Movie.create({
