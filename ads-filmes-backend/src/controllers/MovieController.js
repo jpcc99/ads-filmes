@@ -13,12 +13,12 @@ class MovieController {
         order: ["titulo"],
       });
       if (movies.length === 0) {
-        return res.status(404).send("Filmes não encontrados");
+        return res.status(404).json({ message: "Filmes não encontrados" });
       }
       return res.status(200).json(movies);
     } catch (err) {
       console.error(err);
-      return res.status(500).send("Não foi possível listar os filmes");
+      return res.status(500).json({ message: "Não foi possível listar os filmes" });
     }
   }
 
@@ -36,12 +36,12 @@ class MovieController {
         },
       });
       if (movie.length === 0) {
-        return res.status(404).send("Filme não encontrado");
+        return res.status(404).json({ message: "Filme não encontrado" });
       }
       res.status(200).json(movie[0]);
     } catch (err) {
       console.error(err);
-      return res.status(500).send("Não foi possível buscar o filme");
+      return res.status(500).json({ message: "Não foi possível buscar o filme" });
     }
   }
 
@@ -52,7 +52,7 @@ class MovieController {
   static async create(req, res) {
     const missingFields = await getMissingFields([`titulo`, `descricao`, `ano_lancamento`, `poster_url`, `genero`], req.body);
     if (missingFields.length > 0) {
-      return res.status(400).send(`Não é possível criar o filme sem ${missingFields}`);
+      return res.status(400).json({ message: `Não é possível criar o filme sem ${missingFields}` });
     }
     const { titulo, descricao, ano_lancamento, poster_url, genero } = req.body;
     try {
@@ -62,7 +62,7 @@ class MovieController {
         },
       });
       if (movie.length !== 0) {
-        return res.status(400).send("Filme já cadastrado com esse título");
+        return res.status(400).json({ message: "Filme já cadastrado com esse título" });
       }
       movie = await Movie.create({
         titulo,
@@ -71,10 +71,10 @@ class MovieController {
         poster_url,
         genero,
       });
-      return res.status(201).send(`Filme: ${titulo} criado com sucesso com id: ${movie.movie_id}`);
+      return res.status(201).json({ message: `Filme: ${titulo} criado com sucesso com id: ${movie.movie_id}` });
     } catch (err) {
       console.error(err);
-      return res.status(500).send("Não foi possível cadastrar o filme");
+      return res.status(500).json({ message: "Não foi possível cadastrar o filme" });
     }
   }
 
@@ -98,7 +98,7 @@ class MovieController {
         returning: true,
       });
       if (affectedRows === 0) {
-        return res.status(404).send("Filime não encontrado");
+        return res.status(404).json({ message: "Filime não encontrado" });
       }
       return res.status(200).json({
         message: "Filme foi atualizado", data: await Movie.findByPk(id, {
@@ -107,7 +107,7 @@ class MovieController {
       });
     } catch (err) {
       console.error(err);
-      return res.status(500).send("Não foi possível atualizar o filme");
+      return res.status(500).json({ message: "Não foi possível atualizar o filme" });
     }
   }
 
@@ -124,12 +124,12 @@ class MovieController {
         },
       });
       if (affectedCount < 1) {
-        return res.status(404).send("Filme não encontrado");
+        return res.status(404).json({ message: "Filme não encontrado" });
       }
       return res.status(200).json({ message: "Filme foi removido" });
     } catch (err) {
       console.error(err);
-      return res.status(500).send("Não foi possível remover o filme");
+      return res.status(500).json({ message: "Não foi possível remover o filme" });
     }
   }
 }
