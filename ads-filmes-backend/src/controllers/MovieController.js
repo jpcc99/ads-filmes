@@ -1,5 +1,4 @@
 const Movie = require("../models/Movie");
-const getMissingFields = require("../util/checkForMissingFields");
 
 class MovieController {
   /**
