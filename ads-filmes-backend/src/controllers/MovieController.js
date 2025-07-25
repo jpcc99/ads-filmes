@@ -27,9 +27,6 @@ class MovieController {
   */
   static async getMovieById(req, res) {
     const { id } = req.params;
-    if (!id) {
-      return res.status(400).send("Id inválido");
-    }
     try {
       const movie = await Movie.findAll({
         attributes: [`titulo`, `descricao`, `ano_lancamento`, `poster_url`, `genero`],
