@@ -110,6 +110,28 @@ class MovieController {
       return res.status(500).send("Não foi possível atualizar o filme");
     }
   }
+
+  /**
+   * @param {import ("express").Request} req
+   * @param {import ("express").Response} res
+  */
+  static async remove(req, res) {
+    const { id } = req.params;
+    try {
+      const affectedCount = await Movie.destroy({
+        where: {
+          movie_id: id,
+        },
+      });
+      if (affectedCount < 1) {
+        return res.status(404).send("Filme não encontrado");
+      }
+      return res.status(200).json({ message: "Filme foi removido" });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send("Não foi possível remover o filme");
+    }
+  }
 }
 
 module.exports = MovieController;
