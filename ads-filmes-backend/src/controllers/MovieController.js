@@ -32,6 +32,7 @@ class MovieController {
     }
     try {
       const movie = await Movie.findAll({
+        attributes: [`titulo`, `descricao`, `ano_lancamento`, `poster_url`, `genero`],
         where: {
           movie_id: id,
         },
@@ -39,6 +40,7 @@ class MovieController {
       if (movie.length === 0) {
         return res.status(404).send("Filme não encontrado");
       }
+      res.status(200).json(movie[0]);
     } catch (err) {
       console.error(err);
       return res.status(500).send("Não foi possível buscar o filme");
@@ -54,9 +56,16 @@ class MovieController {
     if (missingFields.length > 0) {
       return res.status(400).send(`Não é possível criar o filme sem ${missingFields}`);
     }
+    const { titulo, descricao, ano_lancamento, poster_url, genero } = req.body;
     try {
-
-      return res.status(501).send("Não implementado");
+      const movie = await Movie.create({
+        titulo,
+        descricao,
+        ano_lancamento,
+        poster_url,
+        genero,
+      });
+      return res.status(201).send(`Filme: ${titulo} criado com sucesso com id: ${movie.movie_id}`);
     } catch (err) {
       console.error(err);
       return res.status(500).send("Não foi possível buscar o filme");
