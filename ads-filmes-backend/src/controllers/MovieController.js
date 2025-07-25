@@ -85,21 +85,26 @@ class MovieController {
   static async update(req, res) {
     const { id } = req.params;
     const dataToUpdate = req.body;
+
     if (!dataToUpdate || Object.keys(dataToUpdate).length === 0) {
-      return res.status(400).send("Nada para atualizar");
+      return res.status(400).json({ message: "Nada para atualizar" });
     }
-    console.log("dataToUpdate: ", dataToUpdate);
+
     try {
-      const [affectedRows, updatedMovie] = await Movie.update(dataToUpdate, {
-        returning: true,
+      const [_affectedCount, affectedRows] = await Movie.update(dataToUpdate, {
         where: {
           movie_id: id,
         },
+        returning: true,
       });
       if (affectedRows === 0) {
-        return res.status(404).send("Filme não encontrado");
+        return res.status(404).send("Filime não encontrado");
       }
-      return res.status(200).json({ message: "Filme atualizado com sucesso", data: updatedMovie[0] })
+      return res.status(200).json({
+        message: "Filme foi atualizado", data: await Movie.findByPk(id, {
+          attributes: [`movie_id`, `titulo`, `descricao`, `ano_lancamento`, `poster_url`, `genero`],
+        })
+      });
     } catch (err) {
       console.error(err);
       return res.status(500).send("Não foi possível atualizar o filme");
