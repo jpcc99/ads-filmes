@@ -63,8 +63,6 @@ npm install
 cd ads-filmes
 npm install
 ```
-```
-```
 
 
 ## Como rodar
