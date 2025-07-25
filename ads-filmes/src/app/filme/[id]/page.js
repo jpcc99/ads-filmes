@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import React from "react";
 
 export default function PaginaDetalhesFilme({ params }) {
     const [filme, setFilme] = useState(null);
@@ -10,7 +11,7 @@ export default function PaginaDetalhesFilme({ params }) {
     
     const router = useRouter();
     const urlApi = "http://localhost:3001";
-    const { id } = params;
+    const { id } = React.use(params);
 
     useEffect(() => {
         buscarFilme();
