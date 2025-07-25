@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # Ads-Filmes
 
 Um projeto para a cadeira de Web II. 
@@ -76,3 +77,81 @@ npm run dev
 ## Licença
 
 [MIT](https://choosealicense.com/licenses/mit/)
+=======
+# ADS Filmes - Sistema de Gerenciamento de Filmes
+
+Sistema para gerenciamento de filmes desenvolvido com ReactJS (Next.js) e Node.js.
+
+## Funcionalidades
+
+- Cadastrar filmes
+- Listar filmes  
+- Ver detalhes dos filmes
+- Editar filmes
+- Excluir filmes
+- Interface responsiva
+
+## Tecnologias
+
+### Frontend
+- Next.js 15
+- React 19
+- React Hooks (useState, useEffect)
+- CSS3
+
+### Backend
+- Node.js
+- Express.js
+- Sequelize
+- SQLite
+
+## Como Executar
+
+### Backend
+
+```bash
+cd ads-filmes/ads-filmes-backend
+npm install
+npm run dev
+```
+
+Backend rodará em: http://localhost:3001
+
+### Frontend
+
+```bash
+cd ads-filmes/ads-filmes
+npm install
+npm run dev
+```
+
+Frontend rodará em: http://localhost:3000
+
+## API Endpoints
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | `/movies` | Listar filmes |
+| GET | `/movies/:id` | Buscar filme por ID |
+| POST | `/movies` | Cadastrar filme |
+| PUT | `/movies/:id` | Atualizar filme |
+| DELETE | `/movies/:id` | Excluir filme |
+
+## Estrutura do Projeto
+
+```
+ads-filmes/
+├── ads-filmes/           # Frontend (Next.js)
+│   └── src/app/
+│       ├── components/   # Componentes React
+│       ├── cadastro/     # Página de cadastro
+│       ├── filmes/       # Página de listagem
+│       ├── filme/[id]/   # Página de detalhes
+│       └── editar/[id]/  # Página de edição
+└── ads-filmes-backend/   # Backend (Node.js)
+    └── src/
+        ├── controllers/
+        ├── models/
+        └── routes/
+```
+>>>>>>> Stashed changes

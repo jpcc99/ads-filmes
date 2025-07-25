@@ -1,13 +1,12 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+
 import FilmesLista from "./components/FilmesLista";
 
-export default function Home() {
+export default function PaginaInicial() {
   return (
-    <main>
-      <h1>Ads-Filmes</h1>
-      <p>Um trabalho para a cadeira de WEB II.</p>
-      <FilmesLista></FilmesLista>
-    </main>
+    <div className="container">
+      <h1>ADS Filmes</h1>
+      <FilmesLista />
+    </div>
   );
 }
