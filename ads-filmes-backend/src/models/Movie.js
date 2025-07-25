@@ -11,6 +11,10 @@ Movie.init({
   titulo: {
     type: DataTypes.STRING,
     allowNull: false,
+    get() {
+      const rawValue = this.getDataValue("titulo");
+      return rawValue ? rawValue.toLowerCase() : null;
+    }
   },
   descricao: {
     type: DataTypes.TEXT,

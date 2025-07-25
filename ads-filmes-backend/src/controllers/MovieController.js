@@ -58,7 +58,15 @@ class MovieController {
     }
     const { titulo, descricao, ano_lancamento, poster_url, genero } = req.body;
     try {
-      const movie = await Movie.create({
+      let movie = await Movie.findAll({
+        where: {
+          titulo: titulo,
+        },
+      });
+      if (titulo.toLowerCase() === movie[0].titulo) {
+        return res.status(400).send("Filme já cadastrado com esse título");
+      }
+      movie = await Movie.create({
         titulo,
         descricao,
         ano_lancamento,
@@ -66,6 +74,12 @@ class MovieController {
         genero,
       });
       return res.status(201).send(`Filme: ${titulo} criado com sucesso com id: ${movie.movie_id}`);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send("Não foi possível cadastrar o filme");
+    }
+  }
+
     } catch (err) {
       console.error(err);
       return res.status(500).send("Não foi possível buscar o filme");
